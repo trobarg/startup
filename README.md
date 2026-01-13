@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-One of the most common obstacles faced by English-speakers trying to learn German is developing an intuition for noun gender. Every German noun has an associated gender, and while there are some guiding patterns for learning them, there are almost as many exceptions. With German Noun Intuassist, users can rapidly practice guessing the gender of German nouns, track their progress over time, and customize their learning until they reach the intuition they're looking for.
+One of the most common obstacles faced by English-speakers trying to learn German is developing an intuition for noun gender. Every German noun has an associated gender, and while there are some guiding patterns for learning them, there are almost as many exceptions. With German Noun Intuassist, users can rapidly practice guessing the gender of various German nouns, track their progress over time, and customize their learning until they reach the intuition they're looking for.
 
 > [!NOTE]
 >  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
@@ -25,7 +25,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Are you trying to learn German? Maybe you've gotten your conjugations down for some irregular verbs and are getting the hang of which prepositions go with which case. You might also be working on adjective endings, and discovering that they depend on knowing the gender of the noun they modify. (You were kind of hoping you wouldn't have to worry so much about those noun genders, right?) Well, I hate to break it to you, but while there's a ton of little patterns for guessing the gender of a noun, they've all got loads of exceptions, and you're probably better off developing an intuition for it through lots of trial and error. And you know what's kind of funny? There isn't a good website out there yet for practicing this sort of thing. That's where German Noun Intuassist comes in. With Intuassist, you can rapidly practice on a vast dataset of nouns customizable to your German-speaking level, celebrate your progress, and motivate other users to keep up the good work! Pretty soon, you'll find yourself forming German sentences without having to think twice about noun genders.
 
 ### Design
 

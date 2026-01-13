@@ -17,9 +17,9 @@ One of the most common obstacles faced by English-speakers trying to learn Germa
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
 - [ ] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
@@ -42,20 +42,21 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Users can create an account or login to an existing one with an email address and corresponding password. Users can also create a username associated with their email address for logging in. Logging out also supported.
+- While logged in or not, users can "Start Practicing." If not logged in, result history will not be tracked.
+- Users can select a narrow dataset of common nouns for a beginner level, or increasingly wider datasets featuring less-common nouns for more advanced German learners.
+- Link provided to open or collapse a list of patterns for guessing the gender of a noun.
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Three HTML pages as follows: Home/practice page with list of patterns, sign up/login page, and a user profile and settings/progress page. Hyperlinks provided between pages as necessary.
+- **CSS** - Simple but elegant design with sufficient contrast for functional buttons. Central presentation that fits to the space of the screen being used.
+- **React** - Presents new nouns for user to practice on, handles opening and collapsing of patterns list, and stores data received from and to be sent to the server. Also handles login?
+- **Service** - Backend endpoints for the following: login, retirieving a batch of nouns from a particular dataset, submitting a batch of practice statistics to be associated with a user.
+- **DB/Login** - Stores users, with passwords encrypted. Also stores summary information about previous practice, such as total nouns attempted, accuracy, etc.
+- **WebSocket** - Sends motivating notifications based on activity of other users, such as the following: "3 other users have practiced on 50+ nouns in the last hour!"
 
 ## 🚀 AWS deliverable
 

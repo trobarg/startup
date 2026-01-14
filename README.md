@@ -28,8 +28,21 @@ Following is a sequence diagram illustrating a typical flow of user interactions
 ```mermaid
 sequenceDiagram
     actor User
-    actor Website
-    You->>Website: Replace this with your design
+    User->>Frontend: Login
+    Frontend->>Server: Send Credentials for Login Attempt
+    Server->>Frontend: Validate Login Attempt
+    User->>Frontend: Start Practicing
+    Frontend->>Server: Request Set of Nouns
+    Server->>Frontend: Return Set of Nouns
+    Frontend->>User: Present Noun for a Guess
+    User->>Frontend: Submit Guess for Presented Noun
+    Frontend->>User: Display Correct Answer and Present Following Noun
+    User->>Frontend: Quit Practice Session
+    Frontend->>Server: Store Summary Statistics for User's Practice Session
+    User->>Frontend: View Profile
+    Frontend->>Server: Request User Statistics
+    Server->>Frontend: Return User Statistics
+    Frontend->>User: Present User Statistics
 ```
 
 ### Key features
@@ -48,9 +61,9 @@ I am going to use the required technologies in the following ways.
 
 - **HTML** - Three HTML pages as follows: Home/practice page with list of patterns, sign up/login page, and a user profile and settings/progress page. Hyperlinks provided between pages as necessary.
 - **CSS** - Simple but elegant design with sufficient contrast for functional buttons. Central presentation that fits to the space of the screen being used.
-- **React** - Presents new nouns for user to practice on, handles opening and collapsing of patterns list, and stores data received from and to be sent to the server. Also handles login?
-- **Service** - Backend endpoints for the following: login, retirieving a batch of nouns from a particular dataset, submitting a batch of practice statistics to be associated with a user.
-- **DB/Login** - Stores users, with passwords encrypted. Also stores summary information about previous practice, such as total nouns attempted, accuracy, etc.
+- **React** - Presents new nouns for user to practice on, handles opening and collapsing of patterns list and countdown to next noun. Also stores data received from and to be sent to the server. Organizes user statistics for presentation on the user's profile page.
+- **Service** - Backend endpoints for the following: login, retrieving a batch of nouns from a particular dataset, submitting a batch of practice statistics to be associated with a user, and retrieving user statistics for presentation.
+- **DB/Login** - Stores user information, with passwords encrypted. Also stores summary information about previous practice, such as total nouns attempted, accuracy, etc.
 - **WebSocket** - Sends motivating notifications based on activity of other users, such as the following: "3 other users have practiced on 50+ nouns in the last hour!"
 
 ## 🚀 AWS deliverable

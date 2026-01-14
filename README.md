@@ -21,7 +21,7 @@ Are you trying to learn German? Maybe you've gotten your conjugations down for s
 
 ### Design
 
-![Design image](Intuassist sketch.jpeg)
+![Design image](IntuassistSketch.jpeg)
 
 Following is a sequence diagram illustrating a typical flow of user interactions with the backend through the service.
 

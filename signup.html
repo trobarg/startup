@@ -9,15 +9,36 @@
 
 <body>
     <header>
-        <h1>Intuassist</h1>
-        <p>Learn German noun genders</p>
+        <h1>Sign up for Intuassist</h1>
     </header>
     <nav>
         <a href="index.html">
             <button type="button">Home</button>
         </a>
     </nav>
-    
+    <main>
+        <form action="profile.html">
+            <div>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="username">Username (optional):</label><br>
+                <input type="text" id="username" name="username">
+            </div>
+            <div>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <label for="confirm-password">Confirm Password:</label><br>
+                <input type="password" id="confirm-password" name="confirm_password" required>
+            </div>
+            <div>
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+    </main>
     <footer>
         <p> Created by Ethan Collier </p>
         <p>

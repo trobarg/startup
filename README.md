@@ -76,15 +76,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I wound up creating 6 HTML pages, 1 for each of the following: home, practice, login, signup, user profile, and helpful information. 
+- [x] **Proper HTML element usage** - I was a little unsure where it was most appropriate to use <div> vs <section>, but I did make use of HTML elements to organize the content of my website pages.
+- [x] **Links** - I included links, often embedded in buttons, everywhere I thought it made sense to do so for navigating between pages. I also included the link to this GitHub repository.
+- [x] **Text** - I included some text content on the helpful information page to give users some guidance on German noun gender patterns.
+- [x] **3rd party API placeholder** - I included a disclaimer for a 3rd-party API call I will make to verify the validity of email addresses provided on signup.
+- [x] **Images** - I included an image of the German flag on the home page of my website.
+- [x] **Login placeholder** - I created placeholders for the entry of login and signup information.
+- [x] **DB data placeholder** - I included placeholders for user statistics that will be displayed on the user profile page after being retrieved from the database.
+- [x] **WebSocket placeholder** - I included a placeholder for a message on the practice page that will be provided by WebSocket communication.
 
 ## 🚀 CSS deliverable
 

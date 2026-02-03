@@ -5,54 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intuassist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css"/>
 </head>
 
-<body>
-    <header>
-        <h1>Intuassist Practice</h1>
+<body class="bg-light text-dark">
+    <header class="container-fluid text-center py-2 bg-white border-bottom">
+        <h1 class="display-6">Intuassist Practice</h1>
     </header>
-    <nav>
-        <a href="index.html">
-            <button type="button">Home</button>
-        </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-nav me-auto">
+                <a class="btn btn-outline-dark btn-sm" href="index.html">Home</a>
+            </div>
+            <div class="navbar-nav d-flex flex-row gap-2">
+                <a class="btn btn-sm btn-dark" href="profile.html">My Profile</a>
+            </div>
+        </div>
     </nav>
-    <main>
-        <section>
-            <a href="profile.html">
-                <button type="button">My Profile</button>
-            </a>
-        </section>
-        <section>
-            <p>Nouns so far this session: 0</p>
-        </section>
-        <section>
-            <h2>Fahrrad</h2>
-        </section>
-        <section>
-            <button type="button">der</button>
-            <button type="button">die</button>
-            <button type="button">das</button>
-        </section>
-        <section>
-            <!-- Response will go here -->
-        </section>
-        <section>
-            <p> 2 other users practicing right now!</p>
-        </section>
-        <section>
-            <a href="info.html">
-                <button type="button">Noun gender help</button>
-            </a>
-        </section>
-        <section>
-            <a href="index.html">
-            <button type="button">Quit Practice Session</button>
-        </a>
-        </section>
+    <main class="container flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center">
+        <div class="main-action-area">
+            <div class="mb-4">
+                <p>Nouns so far this session: 0</p>
+            </div>
+            <div class="word-display">
+                <h2 class="display-1 fw-bold mb-4">Fahrrad</h2>
+            </div>
+            <div class="d-flex gap-3 justify-content-center mb-5">
+                    <button type="button" class="btn btn-lg btn-primary px-4 fs-3">der</button>
+                    <button type="button" class="btn btn-lg btn-primary px-4 fs-3">die</button>
+                    <button type="button" class="btn btn-lg btn-primary px-4 fs-3">das</button>
+                </div>
+
+                <div class="alert alert-light border mb-4">
+                    <small class="text-muted">2 other users practicing right now!</small>
+                </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a href="info.html" class="btn btn-sm btn-outline-secondary">Noun gender help</a>
+            <a href="index.html" class="btn btn-sm btn-outline-danger">Quit Session</a>
+        </div>
     </main>
-    <footer>
-        <p> Created by Ethan Collier </p>
-        <p>
+
+    <footer class="container-fluid text-center py-3 bg-dark text-white-50">
+        <p class="mb-1">Created by Ethan Collier</p>
+        <p class="small">
             View my GitHub repository here:
             <a href="https://github.com/trobarg/startup">Intuassist on GitHub</a>
         </p>

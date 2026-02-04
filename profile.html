@@ -5,41 +5,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intuassist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css"/>
 </head>
 
-<body>
-    <header>
-        <h1>My Intuassist Profile</h1>
+<body class="bg-light text-dark">
+    <header class="container-fluid text-center py-2 bg-white border-bottom">
+        <h1 class="display-6">My Intuassist Profile</h1>
     </header>
-    <nav>
-        <a href="index.html">
-            <button type="button">Home</button>
-        </a>
-    </nav>
-    <main>
-        <p>My username: anonymous</p>
-        <p>My email: anonymous@example.com</p>
-        <section>
-            <button>Log Out</button>
-        </section>
-        <p>Total nouns practiced: 685</p>        
-        <p>Overall accuracy: 43.2%</p>
-        <section>
-            <a href="practice.html">
-                <button type="button">Start Practicing!</button>
-            </a>
-        </section>
-        <p>Noun Dataset Size: (100 to 10,000)</p>
-        <input type="range" id="nouns" name="nouns" min="100" max="10000" value="1000" step="100">
-        <p>Advance Delay: (0.1 to 5 seconds)</p>
-        <input type="range" id="delay" name="delay" min="0.1" max="5" value="1" step="0.1">
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-nav me-auto">
+                <a class="btn btn-outline-dark btn-sm" href="index.html">Home</a>
+            </div>
+    </nav>
+    <main class="container py-5 flex-grow-1">
+        <div class="row g-4 justify-content-center main-action-area">
+            
+            <div class="col-md-5">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white fw-bold">Account Info</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted small text-uppercase fw-semibold">Username</span>
+                            <span>anonymous</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted small text-uppercase fw-semibold">Email</span>
+                            <span>anonymous@example.com</span>
+                        </li>
+                        <li class="list-group-item bg-light text-center py-3">
+                            <a href="login.html" class="btn btn-outline-danger btn-sm w-100">
+                                Log Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-3 small">Lifetime Stats</h5>
+                        <div class="row">
+                            <div class="col">
+                                <div class="h3 mb-0">685</div>
+                                <div class="small text-muted">Nouns</div>
+                            </div>
+                            <div class="col border-start">
+                                <div class="h3 mb-0 text-success">43.2%</div>
+                                <div class="small text-muted">Accuracy</div>
+                            </div>
+                        </div>
+                        <a href="practice.html" class="btn btn-primary w-100 mt-4">Start Practicing!</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card shadow-sm p-4 h-100">
+                    <h5 class="mb-4 border-bottom pb-2 fw-bold">Practice Settings</h5>
+                    
+                    <div class="mb-4">
+                        <label for="nouns" class="form-label d-flex justify-content-between">
+                            Noun Dataset Size <span class="badge bg-light text-dark border">100 - 10,000</span>
+                        </label>
+                        <input type="range" class="form-range" id="nouns" name="nouns" min="100" max="10000" value="1000" step="100">
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="delay" class="form-label d-flex justify-content-between">
+                            Advance Delay <span class="badge bg-light text-dark border">0.1 - 5s</span>
+                        </label>
+                        <input type="range" class="form-range" id="delay" name="delay" min="0.1" max="5" value="1" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
-    <footer>
-        <p> Created by Ethan Collier </p>
-        <p>
+    <footer class="container-fluid text-center py-3 bg-dark text-white-50">
+        <p class="mb-1"> Created by Ethan Collier </p>
+        <p class="small">
             View my GitHub repository here:
-            <a href="https://github.com/trobarg/startup">Intuassist on GitHub</a>
+            <a href="https://github.com/trobarg/startup">GitHub</a>
         </p>
     </footer>
 </body>

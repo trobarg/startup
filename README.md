@@ -76,6 +76,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
+- [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
 - [x] **HTML pages** - I wound up creating 6 HTML pages, 1 for each of the following: home, practice, login, signup, user profile, and helpful information. 
 - [x] **Proper HTML element usage** - I was a little unsure where it was most appropriate to use <div> vs <section>, but I did make use of HTML elements to organize the content of my website pages.
 - [x] **Links** - I included links, often embedded in buttons, everywhere I thought it made sense to do so for navigating between pages. I also included the link to this GitHub repository.
@@ -90,12 +91,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] **Visually appealing colors and layout. No overflowing elements.** - I could have maybe tuned my color scheme a little more, but I think everything looks good. The home page does admittedly have a slightly strange vibe I can't quite put a finger on.
+- [x] **Use of a CSS framework** - I used bootstrap CSS.
+- [x] **All visual elements styled using CSS** - I did use CSS to style the visual elements.
+- [x] **Responsive to window resizing using flexbox and/or grid display** - I think it looks on all the window sizes I was able to test.
+- [x] **Use of a imported font** - I imported and used Inter sans serif.
+- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did use different types of selectors in main.css.
 
 ## 🚀 React part 1: Routing deliverable
 

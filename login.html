@@ -5,36 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intuassist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css"/>
 </head>
 
-<body>
-    <header>
-        <h1>Log in to Intuassist</h1>
+<body class="bg-light text-dark">
+    <header class="container-fluid text-center py-2 bg-white border-bottom">
+        <h1 class="display-6">Log in to Intuassist</h1>
     </header>
-    <nav>
-        <a href="index.html">
-            <button type="button">Home</button>
-        </a>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-nav me-auto">
+                <a class="btn btn-outline-dark btn-sm" href="index.html">Home</a>
+            </div>
+        </div>
     </nav>
-    <main>
-        <form action="profile.html">
-            <div>
-                <label for="identifying">Username or email:</label><br>
-                <input type="text" id="identifying" name="identifying" required>
+    <main class="container flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+        <div class="main-action-area p-4 bg-white shadow rounded" style="max-width: 400px; width: 100%;">
+            <form action="profile.html">
+                <div class="mb-3 text-start">
+                    <label for="identifying" class="form-label">Username or email</label>
+                    <input type="text" class="form-control" id="identifying" name="identifying" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <div class="d-flex justify-content-between">
+                        <label for="password" class="form-label">Password</label>
+                    </div>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary">Log In</button>
+                </div>
+            </form>
+
+            <div class="mt-4 text-center">
+                <p class="mb-0 small">Don't have an account? <a href="signup.html" class="text-decoration-none">Sign up here.</a></p>
             </div>
-            <div>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div>
-                <button type="submit">Log In</button>
-            </div>
-        </form>
-        <p>Don't have an account? <a href="signup.html">Sign up here.</a></p>
+        </div>
     </main>
-    <footer>
-        <p> Created by Ethan Collier </p>
-        <p>
+
+    <footer class="container-fluid text-center py-3 bg-dark text-white-50">
+        <p class="mb-1"> Created by Ethan Collier </p>
+        <p class="small">
             View my GitHub repository here:
             <a href="https://github.com/trobarg/startup">Intuassist on GitHub</a>
         </p>

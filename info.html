@@ -5,35 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intuassist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css"/>
 </head>
 
-<body>
-    <header>
-        <h1>Helpful Information for Guessing Noun Genders</h1>
+<body class="bg-light text-dark">
+    <header class="container-fluid text-center py-3 bg-white border-bottom">
+        <h1 class="display-6">Noun Gender Help</h1>
     </header>
-    <nav>
-        <a href="index.html">
-            <button type="button">Home</button>
-        </a>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+        <div class="container-fluid">
+            <div class="navbar-nav me-auto">
+                <a class="btn btn-outline-dark btn-sm" href="index.html">Home</a>
+            </div>
+            <div class="navbar-nav">
+                <a href="practice.html" class="btn btn-sm btn-primary">Return to Practice</a>
+            </div>
+        </div>
     </nav>
-    <main>
-        <section>
-            <a href="practice.html">
-                <button type="button">Return to Practice Session</button>
-            </a>
-        </section>
-        <h2>Typically "Der" endings:</h2>
-        <p>-ant, -ast, -ich, -ig, -ismus, -ling, -or, -us</p>
-        <h2>Typically "Die" endings:</h2>
-        <p>-a, -ei, -enz, -heit, -ie, -ik, -in, -keit, -schaft, -sion, -tät, -tion, -ung, -ur</p>
-        <h2>Typically "Das" endings:</h2>
-        <p>-chen, -lein, -ma, -ment, -sel, -tel, -tum, -um</p>
+
+    <main class="container py-5 flex-grow-1">
+        <div class="mx-auto" style="max-width: 800px;">
+            
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h2 class="h5 fw-bold">Typically "Der" (Masculine) Endings:</h2>
+                            <p class="fs-5 font-monospace mb-0">-ant, -ast, -ich, -ig, -ismus, -ling, -or, -us</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h2 class="h5 fw-bold">Typically "Die" (Feminine) Endings:</h2>
+                            <p class="fs-5 font-monospace mb-0">-a, -ei, -enz, -heit, -ie, -ik, -in, -keit, -schaft, -sion, -tät, -tion, -ung, -ur</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h2 class="h5 fw-bold">Typically "Das" (Neuter) Endings:</h2>
+                            <p class="fs-5 font-monospace mb-0">-chen, -lein, -ma, -ment, -sel, -tel, -tum, -um</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer>
-        <p> Created by Ethan Collier </p>
-        <p>
+
+    <footer class="container-fluid text-center py-3 bg-dark text-white-50">
+        <p class="mb-1"> Created by Ethan Collier </p>
+        <p class="small">
             View my GitHub repository here:
-            <a href="https://github.com/trobarg/startup">Intuassist on GitHub</a>
+            <a href="https://github.com/trobarg/startup">GitHub</a>
         </p>
     </footer>
 </body>

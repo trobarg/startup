@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+  --bs-body-font-family: 'Inter', sans-serif;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -13,7 +19,7 @@ main {
 }
 
 .main-action-area {
-  transform: translateY(-50px);
+  transform: translateY(-80px);
 }
 
 .btn-lg.p-3 {
@@ -26,4 +32,31 @@ main {
   transform: scale(1.05);
   filter: brightness(1.1);
   box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+}
+
+.main-action-area:hover {
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.1));
+}
+
+#masculine-btn {
+    background-color: #2b6cb0;
+    border-color: #2c5282;
+}
+
+#feminine-btn {
+    background-color: #c53030;
+    border-color: #9b2c2c;
+}
+
+#neuter-btn {
+    background-color: #2f855a;
+    border-color: #276749;
+}
+
+#masculine-btn:hover, 
+#feminine-btn:hover, 
+#neuter-btn:hover {
+    filter: brightness(1.15);
+    transform: scale(1.05);
+    transition: all 0.2s ease;
 }

@@ -18,9 +18,10 @@ main {
   flex-grow: 1;
 }
 
-.main-action-area {
+/* Caused things to break in initial React porting */
+/* .main-action-area {
   transform: translateY(-80px);
-}
+} */
 
 .btn-lg.p-3 {
   border-radius: 20px;

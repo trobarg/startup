@@ -103,9 +103,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - Routing between login and voting components.
+- [x] **Bundled using Vite** - After some technical difficulties with my package manager, I did bundle using Vite.
+- [x] **Components** - My components did wind up looking rather different from those of the Simon example, which caused a few headaches.
+- [x] **Router** - Also experienced some problems due to differences of architecture here, but I did route my components in app.jsx.
 
 ## 🚀 React part 2: Reactivity
 

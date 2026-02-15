@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 export function Home() {
     const navigate = useNavigate();
     return (
-        <div className="bg-light text-dark">
+        <div className="bg-light text-dark min-vh-100 d-flex flex-column">
             <header className="container-fluid text-center py-2 bg-white border-bottom">
                 <img src="/Flag_of_Germany.png" alt="Flag of Germany" className="img-fluid mb-2" style={{ maxHeight: '100px', width: 'auto' }} />
                 <h1 className="display-4">Intuassist</h1>

@@ -13,17 +13,18 @@ import { Home } from './home/home';
 export default function App() {
     return (
         <BrowserRouter>
-            <div>
-                <Routes>
-                    <Route path='/' element={<Home />} exact />
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/signup' element={<Signup />} />
-                    <Route path='/profile' element={<Profile />} />
-                    <Route path='/practice' element={<Practice />} />
-                    <Route path='/info' element={<Info />} />
-                    <Route path='*' element={<NotFound />} />
-                </Routes>
-
+            <div className="d-flex flex-column min-vh-100">
+                <div className="flex-grow-1">
+                    <Routes>
+                        <Route path='/' element={<Home />} exact />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/signup' element={<Signup />} />
+                        <Route path='/profile' element={<Profile />} />
+                        <Route path='/practice' element={<Practice />} />
+                        <Route path='/info' element={<Info />} />
+                        <Route path='*' element={<NotFound />} />
+                    </Routes>
+                </div>
                 <footer className="container-fluid text-center py-3 bg-dark text-white-50">
                     <p className="mb-1"> Created by Ethan Collier </p>
                     <p className="small">

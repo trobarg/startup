@@ -14,7 +14,7 @@ export default function App() {
     return (
         <BrowserRouter>
             <div className="d-flex flex-column min-vh-100">
-                <div className="flex-grow-1">
+                <div className="flex-grow-1 d-flex flex-column">
                     <Routes>
                         <Route path='/' element={<Home />} exact />
                         <Route path='/login' element={<Login />} />

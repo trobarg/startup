@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 
 export function Info() {
     return (
-        <div className="bg-light text-dark min-vh-100 d-flex flex-column">
+        <div className="bg-light text-dark d-flex flex-column flex-fill">
             <header className="container-fluid text-center py-3 bg-white border-bottom">
                 <h1 className="display-6">Noun Gender Help</h1>
             </header>
 
-            <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <div className="navbar-nav me-auto">
                         <NavLink className="btn btn-outline-dark btn-sm" to="/">Home</NavLink>

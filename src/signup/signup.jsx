@@ -8,7 +8,7 @@ export function Signup() {
         navigate('/profile');
     };
     return (
-        <div className="bg-light text-dark min-vh-100 d-flex flex-column">
+        <div className="bg-light text-dark d-flex flex-column flex-fill">
             <header className="container-fluid text-center py-2 bg-white border-bottom">
                 <h1 className="display-6">Sign up for Intuassist</h1>
             </header>
@@ -22,7 +22,7 @@ export function Signup() {
             </nav>
 
             <main className="container flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-                <div className="main-action-area p-4 bg-white shadow rounded" style={{ maxWidth: '400px', width: '100%' }}>
+                <div className="main-centered-content p-4 bg-white shadow rounded" style={{ maxWidth: '400px', width: '100%' }}>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3 text-start">
                             <label htmlFor="email" className="form-label">Email</label>

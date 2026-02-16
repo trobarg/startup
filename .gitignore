@@ -1,3 +1,5 @@
 .vscode/
 deployFiles.sh
 node_modules/
+deployReact.sh
+.DS_Store

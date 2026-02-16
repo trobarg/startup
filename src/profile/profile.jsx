@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export function Profile() {
     return (
-        <div className="bg-light text-dark min-vh-100 d-flex flex-column">
+        <div className="bg-light text-dark d-flex flex-column flex-fill">
             <header className="container-fluid text-center py-2 bg-white border-bottom">
                 <h1 className="display-6">My Intuassist Profile</h1>
             </header>

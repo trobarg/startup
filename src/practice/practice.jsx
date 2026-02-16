@@ -1,13 +1,12 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export function Practice() {
-    const navigate = useNavigate();
     const nounCount = 0;
     const currentWord = "Fahrrad";
 
     return (
-        <div className="bg-light text-dark min-vh-100 d-flex flex-column">
+        <div className="bg-light text-dark d-flex flex-column flex-fill">
             <header className="container-fluid text-center py-2 bg-white border-bottom">
                 <h1 className="display-6">Intuassist Practice</h1>
             </header>
@@ -24,7 +23,7 @@ export function Practice() {
             </nav>
 
             <main className="container flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center">
-                <div>
+                <div className="main-centered-content">
                     <div className="mb-4">
                         <p>Nouns so far this session: {nounCount}</p>
                     </div>

@@ -18,10 +18,9 @@ main {
   flex-grow: 1;
 }
 
-/* Caused things to break in initial React porting */
-/* .main-action-area {
-  transform: translateY(-80px);
-} */
+.main-centered-content {
+  margin-top: -10vh;
+}
 
 .btn-lg.p-3 {
   border-radius: 20px;
@@ -33,10 +32,6 @@ main {
   transform: scale(1.05);
   filter: brightness(1.1);
   box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
-}
-
-.main-action-area:hover {
-  filter: drop-shadow(0 0 10px rgba(0,0,0,0.1));
 }
 
 #masculine-btn {

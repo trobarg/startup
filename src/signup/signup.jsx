@@ -1,12 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useApp } from '../context/AppContext';
 
 export function Signup() {
     const navigate = useNavigate();
+    const { signup } = useApp();
+
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate('/profile');
+        setErrorMsg('');
+        if (password !== confirmPassword) {
+            setErrorMsg('Passwords do not match');
+            return;
+        }
+        if (password.length < 6) {
+            setErrorMsg('Password must be at least 6 characters');
+            return;
+        }
+        const result = signup(email, username, password);
+        if (result.ok) {
+            navigate('/profile');
+        } else {
+            setErrorMsg(result.error);
+        }
     };
+
     return (
         <div className="bg-light text-dark d-flex flex-column flex-fill">
             <header className="container-fluid text-center py-2 bg-white border-bottom">
@@ -26,25 +50,62 @@ export function Signup() {
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3 text-start">
                             <label htmlFor="email" className="form-label">Email</label>
-                            <input type="email" className="form-control" id="email" name="email" required />
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
                         </div>
-                        
+
                         <div className="mb-3 text-start">
                             <label htmlFor="username" className="form-label">
                                 Username <span className="text-muted small">(optional)</span>
                             </label>
-                            <input type="text" className="form-control" id="username" name="username" />
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="username"
+                                name="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
                         </div>
 
                         <div className="mb-3 text-start">
                             <label htmlFor="password" className="form-label">Password</label>
-                            <input type="password" className="form-control" id="password" name="password" required />
+                            <input
+                                type="password"
+                                className="form-control"
+                                id="password"
+                                name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
                         </div>
 
                         <div className="mb-3 text-start">
                             <label htmlFor="confirm-password" className="form-label">Confirm Password</label>
-                            <input type="password" className="form-control" id="confirm-password" name="confirm_password" required />
+                            <input
+                                type="password"
+                                className="form-control"
+                                id="confirm-password"
+                                name="confirm_password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
                         </div>
+
+                        {errorMsg && (
+                            <div className="alert alert-danger py-2 small" role="alert">
+                                {errorMsg}
+                            </div>
+                        )}
 
                         <div className="d-grid gap-2">
                             <button type="submit" className="btn btn-primary">Sign Up</button>

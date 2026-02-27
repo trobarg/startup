@@ -103,6 +103,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
+- [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
 - [x] **Bundled using Vite** - After some technical difficulties with my package manager, I did bundle using Vite.
 - [x] **Components** - My components did wind up looking rather different from those of the Simon example, which caused a few headaches.
 - [x] **Router** - Also experienced some problems due to differences of architecture here, but I did route my components in app.jsx.
@@ -111,13 +112,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] **All functionality implemented or mocked out** - I did implement or mock out all of the originally intended functionality. Allowing for the adjusting of the user's noun dataset size at this stage was perhaps the most difficult part. 
+- [x] **Hooks** - I used several hooks, including useState and useEffect.
 
 ## 🚀 Service deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
+- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
 - [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
 - [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
 - [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
@@ -128,6 +131,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
+- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
 - [ ] **User registration** - I did not complete this part of the deliverable.
 - [ ] **User login and logout** - I did not complete this part of the deliverable.
 - [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
@@ -138,6 +142,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
+- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
 - [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
 - [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
 - [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.

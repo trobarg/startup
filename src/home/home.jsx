@@ -1,7 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useApp } from '../context/AppContext';
 
 export function Home() {
+    const { user, logout } = useApp();
+    const navigate = useNavigate();
+
     return (
         <div className="bg-light text-dark d-flex flex-column flex-fill">
             <header className="container-fluid text-center py-2 bg-white border-bottom">
@@ -16,9 +20,22 @@ export function Home() {
                         <NavLink className="btn btn-outline-dark btn-sm" to="/">Home</NavLink>
                     </div>
                     <div className="navbar-nav d-flex flex-row gap-2">
-                        <NavLink className="btn btn-sm btn-outline-primary" to="/login">Log in</NavLink>
-                        <NavLink className="btn btn-sm btn-outline-primary" to="/signup">Sign up</NavLink>
-                        <NavLink className="btn btn-sm btn-dark" to="/profile">My Profile</NavLink>
+                        {user ? (
+                            <>
+                                <NavLink className="btn btn-sm btn-dark" to="/profile">My Profile</NavLink>
+                                <button
+                                    className="btn btn-sm btn-outline-danger"
+                                    onClick={() => { logout(); navigate('/login'); }}
+                                >
+                                    Log Out
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <NavLink className="btn btn-sm btn-outline-primary" to="/login">Log In</NavLink>
+                                <NavLink className="btn btn-sm btn-outline-primary" to="/signup">Sign Up</NavLink>
+                            </>
+                        )}
                     </div>
                 </div>
             </nav>

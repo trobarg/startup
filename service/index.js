@@ -67,6 +67,11 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
+// GetUser — return the currently authenticated user
+apiRouter.get('/user', verifyAuth, (req, res) => {
+  res.send({ email: req.user.email, username: req.user.username });
+});
+
 // GetSettings
 apiRouter.get('/user/settings', verifyAuth, (req, res) => {
   res.send(req.user.settings);
@@ -84,11 +89,11 @@ apiRouter.get('/user/stats', verifyAuth, (req, res) => {
   res.send(req.user.stats);
 });
 
-// RecordAnswer — increment totalNouns and potentially correctAnswers
+// RecordStats — apply a batched delta to the user's stats
 apiRouter.post('/user/stats/record', verifyAuth, (req, res) => {
-  const { isCorrect } = req.body;
-  req.user.stats.totalNouns     += 1;
-  req.user.stats.correctAnswers += isCorrect ? 1 : 0;
+  const { nounsDelta, correctDelta } = req.body;
+  req.user.stats.totalNouns     += nounsDelta;
+  req.user.stats.correctAnswers += correctDelta;
   res.send(req.user.stats);
 });
 

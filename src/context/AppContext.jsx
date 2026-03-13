@@ -1,106 +1,153 @@
-import React, { createContext, useContext, useState } from 'react';
-
-const LS_USERS    = 'intuassist_users';
-const LS_SESSION  = 'intuassist_session';
-const LS_SETTINGS = (username) => `intuassist_settings_${username}`;
-const LS_STATS    = (username) => `intuassist_stats_${username}`;
+import { createContext, useContext, useState, useEffect, useRef } from 'react';
 
 const DEFAULT_SETTINGS = { datasetSize: 1000, advanceDelay: 1 };
 const DEFAULT_STATS    = { totalNouns: 0, correctAnswers: 0 };
 
-function readJSON(key, fallback) {
-    try {
-        const raw = localStorage.getItem(key);
-        return raw ? JSON.parse(raw) : fallback;
-    } catch {
-        return fallback;
-    }
-}
-
-function writeJSON(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-}
-
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-    const [user, setUser] = useState(() => readJSON(LS_SESSION, null));
+    const [user, setUser]         = useState(null);
+    const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+    const [stats, setStats]       = useState(DEFAULT_STATS);
+    const [loading, setLoading]   = useState(true);
 
-    const [settings, setSettings] = useState(() => {
-        const session = readJSON(LS_SESSION, null);
-        if (session) return readJSON(LS_SETTINGS(session.username), DEFAULT_SETTINGS);
-        return DEFAULT_SETTINGS;
-    });
+    // Refs so sync functions always read the latest values without stale closures
+    const userRef        = useRef(user);
+    const settingsRef    = useRef(settings);
+    const pendingDelta   = useRef({ nounsDelta: 0, correctDelta: 0 });
 
-    const [stats, setStats] = useState(() => {
-        const session = readJSON(LS_SESSION, null);
-        if (session) return readJSON(LS_STATS(session.username), DEFAULT_STATS);
-        return DEFAULT_STATS;
-    });
+    useEffect(() => { userRef.current     = user;     }, [user]);
+    useEffect(() => { settingsRef.current = settings; }, [settings]);
 
-    function signup(email, username, password) {
-        const users = readJSON(LS_USERS, []);
-        if (users.some((u) => u.email === email)) {
-            return { ok: false, error: 'Email already registered' };
-        }
-        const finalUsername = username.trim() || email.split('@')[0];
-        const newUser = { username: finalUsername, email, password };
-        writeJSON(LS_USERS, [...users, newUser]);
-        const session = { username: finalUsername, email };
-        writeJSON(LS_SESSION, session);
-        setUser(session);
+    // Restore session on page load
+    useEffect(() => {
+        fetch('/api/user')
+            .then((res) => (res.ok ? res.json() : null))
+            .then(async (userData) => {
+                if (userData) {
+                    setUser(userData);
+                    const [s, st] = await Promise.all([
+                        fetch('/api/user/settings').then((r) => r.json()),
+                        fetch('/api/user/stats').then((r) => r.json()),
+                    ]);
+                    setSettings(s);
+                    setStats(st);
+                }
+            })
+            .finally(() => setLoading(false));
+    }, []);
+
+    // Flush any unsaved data if the user closes or refreshes the tab
+    useEffect(() => {
+        const handleUnload = () => {
+            if (!userRef.current) return;
+            const delta = pendingDelta.current;
+            if (delta.nounsDelta > 0) {
+                navigator.sendBeacon(
+                    '/api/user/stats/record',
+                    new Blob([JSON.stringify(delta)], { type: 'application/json' })
+                );
+                pendingDelta.current = { nounsDelta: 0, correctDelta: 0 };
+            }
+            navigator.sendBeacon(
+                '/api/user/settings',
+                new Blob([JSON.stringify(settingsRef.current)], { type: 'application/json' })
+            );
+        };
+        window.addEventListener('beforeunload', handleUnload);
+        return () => window.removeEventListener('beforeunload', handleUnload);
+    }, []);
+
+    async function signup(email, username, password) {
+        const res = await fetch('/api/auth/create', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify({ email, username, password }),
+        });
+        if (res.status === 409) return { ok: false, error: 'Email already registered' };
+        if (!res.ok)            return { ok: false, error: 'Signup failed' };
+
+        const userData = await res.json();
+        setUser(userData);
         setSettings(DEFAULT_SETTINGS);
         setStats(DEFAULT_STATS);
+        pendingDelta.current = { nounsDelta: 0, correctDelta: 0 };
         return { ok: true };
     }
 
-    function login(identifier, password) {
-        const users = readJSON(LS_USERS, []);
-        const found = users.find(
-            (u) =>
-                (u.username === identifier || u.email === identifier) &&
-                u.password === password
-        );
-        if (!found) {
-            return { ok: false, error: 'Invalid username/email or password' };
-        }
-        const session = { username: found.username, email: found.email };
-        writeJSON(LS_SESSION, session);
-        setUser(session);
-        setSettings(readJSON(LS_SETTINGS(found.username), DEFAULT_SETTINGS));
-        setStats(readJSON(LS_STATS(found.username), DEFAULT_STATS));
+    async function login(identifier, password) {
+        const res = await fetch('/api/auth/login', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify({ identifier, password }),
+        });
+        if (!res.ok) return { ok: false, error: 'Invalid username/email or password' };
+
+        const userData = await res.json();
+        setUser(userData);
+        const [s, st] = await Promise.all([
+            fetch('/api/user/settings').then((r) => r.json()),
+            fetch('/api/user/stats').then((r) => r.json()),
+        ]);
+        setSettings(s);
+        setStats(st);
+        pendingDelta.current = { nounsDelta: 0, correctDelta: 0 };
         return { ok: true };
     }
 
-    function logout() {
-        localStorage.removeItem(LS_SESSION);
+    async function logout() {
+        await syncStats();
+        await syncSettings();
+        await fetch('/api/auth/logout', { method: 'DELETE' });
         setUser(null);
         setSettings(DEFAULT_SETTINGS);
         setStats(DEFAULT_STATS);
+        pendingDelta.current = { nounsDelta: 0, correctDelta: 0 };
     }
 
+    // Local-only — no backend call. Accumulates a delta for the next sync.
+    function recordAnswer(isCorrect) {
+        pendingDelta.current.nounsDelta  += 1;
+        pendingDelta.current.correctDelta += isCorrect ? 1 : 0;
+        setStats((prev) => ({
+            totalNouns:     prev.totalNouns + 1,
+            correctAnswers: prev.correctAnswers + (isCorrect ? 1 : 0),
+        }));
+    }
+
+    // Local-only — no backend call until sync.
     function saveSettings(newSettings) {
         setSettings(newSettings);
-        if (user) {
-            writeJSON(LS_SETTINGS(user.username), newSettings);
-        }
+        settingsRef.current = newSettings;
     }
 
-    function recordAnswer(isCorrect) {
-        setStats((prev) => {
-            const newStats = {
-                totalNouns: prev.totalNouns + 1,
-                correctAnswers: prev.correctAnswers + (isCorrect ? 1 : 0),
-            };
-            if (user) {
-                writeJSON(LS_STATS(user.username), newStats);
-            }
-            return newStats;
+    async function syncStats() {
+        const delta = pendingDelta.current;
+        if (!userRef.current || delta.nounsDelta === 0) return;
+        pendingDelta.current = { nounsDelta: 0, correctDelta: 0 };
+        await fetch('/api/user/stats/record', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(delta),
+        });
+    }
+
+    async function syncSettings() {
+        if (!userRef.current) return;
+        await fetch('/api/user/settings', {
+            method:  'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(settingsRef.current),
         });
     }
 
     return (
-        <AppContext.Provider value={{ user, login, signup, logout, settings, saveSettings, stats, recordAnswer }}>
+        <AppContext.Provider value={{
+            user, login, signup, logout,
+            settings, saveSettings, syncSettings,
+            stats, recordAnswer, syncStats,
+            loading,
+        }}>
             {children}
         </AppContext.Provider>
     );

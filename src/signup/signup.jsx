@@ -12,7 +12,7 @@ export function Signup() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setErrorMsg('');
         if (password !== confirmPassword) {
@@ -23,7 +23,7 @@ export function Signup() {
             setErrorMsg('Password must be at least 6 characters');
             return;
         }
-        const result = signup(email, username, password);
+        const result = await signup(email, username, password);
         if (result.ok) {
             navigate('/profile');
         } else {

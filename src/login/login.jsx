@@ -10,10 +10,10 @@ export function Login() {
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setErrorMsg('');
-        const result = login(identifier, password);
+        const result = await login(identifier, password);
         if (result.ok) {
             navigate('/profile');
         } else {

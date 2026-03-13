@@ -1,10 +1,13 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 
 export function Profile() {
     const navigate = useNavigate();
-    const { user, logout, settings, saveSettings, stats } = useApp();
+    const { user, logout, settings, saveSettings, syncSettings, stats } = useApp();
+
+    // Flush settings when the user navigates away
+    useEffect(() => { return () => { syncSettings(); }; }, []);
 
     const accuracy = stats.totalNouns === 0
         ? '—'
@@ -67,7 +70,7 @@ export function Profile() {
                                 <li className="list-group-item bg-light text-center py-3">
                                     <button
                                         className="btn btn-outline-danger btn-sm w-100"
-                                        onClick={() => { logout(); navigate('/login'); }}
+                                        onClick={async () => { await logout(); navigate('/'); }}
                                     >
                                         Log Out
                                     </button>

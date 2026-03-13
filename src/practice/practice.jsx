@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { NOUNS } from '../data/nouns';
@@ -16,7 +16,10 @@ function buildPool(datasetSize, allNouns) {
 }
 
 export function Practice() {
-    const { user, settings, recordAnswer } = useApp();
+    const { user, settings, recordAnswer, syncStats } = useApp();
+
+    // Flush accumulated stats when the user navigates away
+    useEffect(() => { return () => { syncStats(); }; }, []);
 
     const [pool, setPool] = useState([]);
     const [poolIndex, setPoolIndex] = useState(0);
@@ -45,7 +48,7 @@ export function Practice() {
         const isCorrect = clickedGender === currentNoun.gender;
         setButtonsDisabled(true);
         setFeedback({ correct: currentNoun.gender, clicked: clickedGender });
-        recordAnswer(isCorrect);
+        if (user) recordAnswer(isCorrect);
         setNounCount((n) => n + 1);
 
         setTimeout(() => {

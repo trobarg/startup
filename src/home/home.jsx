@@ -1,10 +1,23 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 
 export function Home() {
     const { user, logout } = useApp();
     const navigate = useNavigate();
+
+    const [quote, setQuote] = useState(null);
+
+    useEffect(() => {
+        fetch('https://dummyjson.com/quotes/random')
+            .then((res) => (res.ok ? res.json() : null))
+            .then((data) => {
+                if (data) {
+                    setQuote({ text: data.quote, author: data.author });
+                }
+            })
+            .catch(() => {});
+    }, []);
 
     return (
         <div className="bg-light text-dark d-flex flex-column flex-fill">
@@ -25,7 +38,7 @@ export function Home() {
                                 <NavLink className="btn btn-sm btn-dark" to="/profile">My Profile</NavLink>
                                 <button
                                     className="btn btn-sm btn-outline-danger"
-                                    onClick={() => { logout(); navigate('/login'); }}
+                                    onClick={async () => { await logout(); navigate('/'); }}
                                 >
                                     Log Out
                                 </button>
@@ -46,6 +59,12 @@ export function Home() {
                     <div className="mt-4">
                         <NavLink to="/info" className="btn btn-outline-secondary">Noun gender help & rules</NavLink>
                     </div>
+                    {quote && (
+                        <blockquote className="blockquote mt-5 px-3">
+                            <p className="fst-italic text-muted">"{quote.text}"</p>
+                            <footer className="blockquote-footer">{quote.author}</footer>
+                        </blockquote>
+                    )}
                 </div>
             </main>
         </div>

@@ -1,5 +1,5 @@
 .vscode/
 deployFiles.sh
 node_modules/
-deployReact.sh
+deployService.sh
 .DS_Store

@@ -3,3 +3,4 @@ deployFiles.sh
 node_modules/
 deployService.sh
 .DS_Store
+dbConfig.json

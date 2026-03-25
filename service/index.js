@@ -2,15 +2,10 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
+const DB = require('./database.js');
 const app = express();
 
 const authCookieName = 'token';
-
-// Users, settings, and stats are kept in memory and reset on service restart.
-let users = [];
-
-const DEFAULT_SETTINGS = { datasetSize: 1000, advanceDelay: 1 };
-const DEFAULT_STATS    = { totalNouns: 0, correctAnswers: 0 };
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -25,11 +20,11 @@ app.use('/api', apiRouter);
 apiRouter.post('/auth/create', async (req, res) => {
   const { email, username, password } = req.body;
 
-  if (await findUser('email', email)) {
+  if (await DB.findUser('email', email)) {
     return res.status(409).send({ msg: 'Email already registered' });
   }
 
-  const user = await createUser(email, username, password);
+  const user = await DB.createUser(email, username, password);
   setAuthCookie(res, user.token);
   res.send({ email: user.email, username: user.username });
 });
@@ -38,10 +33,11 @@ apiRouter.post('/auth/create', async (req, res) => {
 apiRouter.post('/auth/login', async (req, res) => {
   const { identifier, password } = req.body;
 
-  const user = (await findUser('username', identifier)) ?? (await findUser('email', identifier));
+  const user = (await DB.findUser('username', identifier)) ?? (await DB.findUser('email', identifier));
   if (user && await bcrypt.compare(password, user.password)) {
-    user.token = uuid.v4();
-    setAuthCookie(res, user.token);
+    const token = uuid.v4();
+    await DB.updateUser({ email: user.email }, { token });
+    setAuthCookie(res, token);
     return res.send({ email: user.email, username: user.username });
   }
 
@@ -50,15 +46,15 @@ apiRouter.post('/auth/login', async (req, res) => {
 
 // DeleteAuth — log out
 apiRouter.delete('/auth/logout', async (req, res) => {
-  const user = await findUser('token', req.cookies[authCookieName]);
-  if (user) delete user.token;
+  const user = await DB.findUser('token', req.cookies[authCookieName]);
+  if (user) await DB.updateUser({ email: user.email }, { token: null });
   res.clearCookie(authCookieName);
   res.status(204).end();
 });
 
 // Verify that the request carries a valid auth cookie
 const verifyAuth = async (req, res, next) => {
-  const user = await findUser('token', req.cookies[authCookieName]);
+  const user = await DB.findUser('token', req.cookies[authCookieName]);
   if (user) {
     req.user = user;
     next();
@@ -78,10 +74,11 @@ apiRouter.get('/user/settings', verifyAuth, (req, res) => {
 });
 
 // SaveSettings
-apiRouter.put('/user/settings', verifyAuth, (req, res) => {
+apiRouter.put('/user/settings', verifyAuth, async (req, res) => {
   const { datasetSize, advanceDelay } = req.body;
-  req.user.settings = { datasetSize, advanceDelay };
-  res.send(req.user.settings);
+  const settings = { datasetSize, advanceDelay };
+  await DB.updateUser({ email: req.user.email }, { settings });
+  res.send(settings);
 });
 
 // GetStats
@@ -90,11 +87,14 @@ apiRouter.get('/user/stats', verifyAuth, (req, res) => {
 });
 
 // RecordStats — apply a batched delta to the user's stats
-apiRouter.post('/user/stats/record', verifyAuth, (req, res) => {
+apiRouter.post('/user/stats/record', verifyAuth, async (req, res) => {
   const { nounsDelta, correctDelta } = req.body;
-  req.user.stats.totalNouns     += nounsDelta;
-  req.user.stats.correctAnswers += correctDelta;
-  res.send(req.user.stats);
+  const stats = {
+    totalNouns:     req.user.stats.totalNouns + nounsDelta,
+    correctAnswers: req.user.stats.correctAnswers + correctDelta,
+  };
+  await DB.updateUser({ email: req.user.email }, { stats });
+  res.send(stats);
 });
 
 // Default error handler
@@ -106,25 +106,6 @@ app.use((err, _req, res, _next) => {
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
-
-async function createUser(email, username, password) {
-  const finalUsername = (username ?? '').trim() || email.split('@')[0];
-  const user = {
-    email,
-    username: finalUsername,
-    password: await bcrypt.hash(password, 10),
-    token: uuid.v4(),
-    settings: { ...DEFAULT_SETTINGS },
-    stats:    { ...DEFAULT_STATS },
-  };
-  users.push(user);
-  return user;
-}
-
-async function findUser(field, value) {
-  if (!value) return null;
-  return users.find((u) => u[field] === value) ?? null;
-}
 
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {

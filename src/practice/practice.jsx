@@ -24,6 +24,19 @@ export function Practice() {
     const [pool, setPool] = useState([]);
     const [poolIndex, setPoolIndex] = useState(0);
     const [nounCount, setNounCount] = useState(0);
+    const [practicingCount, setPracticingCount] = useState(1);
+
+    useEffect(() => {
+        const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        const ws = new WebSocket(`${proto}://${window.location.host}/ws`);
+        ws.onmessage = (event) => {
+            try {
+                const msg = JSON.parse(event.data);
+                if (msg.type === 'count') setPracticingCount(msg.count);
+            } catch {}
+        };
+        return () => ws.close();
+    }, []);
     // feedback: null | { correct: 'der'|'die'|'das', clicked: 'der'|'die'|'das' }
     const [feedback, setFeedback] = useState(null);
     const [buttonsDisabled, setButtonsDisabled] = useState(false);
@@ -125,7 +138,11 @@ export function Practice() {
                         ))}
                     </div>
                     <div className="alert alert-light border mb-4">
-                        <small className="text-muted">2 other users practicing right now!</small>
+                        <small className="text-muted">
+                            {practicingCount === 1
+                                ? 'You are the only one practicing right now.'
+                                : `${practicingCount - 1} other ${practicingCount - 1 === 1 ? 'user' : 'users'} practicing right now!`}
+                        </small>
                     </div>
                 </div>
                 <div className="d-flex gap-2">

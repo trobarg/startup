@@ -141,9 +141,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] **Backend listens for WebSocket connection** - Backend listens in peerProxy.js.
+- [x] **Frontend makes WebSocket connection** - Frontend does make WebSocket connection.
+- [x] **Data sent over WebSocket connection** - Currnet number of users practicing is sent over WebSocket.
+- [x] **WebSocket data displayed** - Data is displayed on practice.jsx.
